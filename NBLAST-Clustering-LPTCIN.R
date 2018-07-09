@@ -61,12 +61,15 @@ plot(lptcin.jfrc2013.hc,labels=lptcin[,'label'])
 
 # Interim conclusion is that LHS and RHS are too different after mapping
 
+
+## Let's try clustering RHS neurons only
+
 rids=subset(lptcin, side=='R', rval='name')
 lptcin.hcr=nhclust(neuron_names = rids, scoremat = lptcin.aba)
-
-
 plot(lptcin.hcr, labels = lptcin[rids,'label'])
-abline(h=.65) # gives 6 groups
+abline(h=.65, lty=2) # gives 6 groups
+
+# ... if we want the coloured dendrogram, see above
 lptcin.dr=as.dendrogram(lptcin.hcr)
 plot(lptcin.dr)
 
@@ -84,5 +87,5 @@ lptcin[,'group']=lptcin.hcr.groups[match(lptcin[,'skid'], names(lptcin.hcr.group
 
 
 # this group contains incomplete neurons
-catmaid_set_annotations_for_skeletons(subset(lptcin.hcr, k=6, groups=3), "ME_TRACE_MORE")
-
+g3=subset(lptcin.hcr, k=6, groups=3)
+# catmaid_set_annotations_for_skeletons(g3, "ME_TRACE_MORE")
