@@ -22,7 +22,9 @@ lptcin[lskids,'side']='L'
 nopen3d()
 plot3d(lptcin, soma=T, col=side)
 plot3d(FAFB)
-find.neuron(db = lptcin)
+
+# example of looking for a neuron (draw a box in rgl window)
+# find.neuron(db = lptcin)
 
 lptcin[,'label']=sub("LPTCIN.*","LPTCIN", lptcin[,'name'])
 
