@@ -45,10 +45,9 @@ spheres3d(subset(hssin[,c("post_node_x","post_node_y","post_node_z")], hssin[,'g
 
 hsrin.all=catmaid_get_connectors_between(post_skids = 'HS Cell Right')
 hsrin.all.nolptc=subset(hsrin.all, !pre_skid%in%lptcin[,'skid'])
-nopen3d()
 spheres3d(subset(hsrin.all.nolptc, post_skid==4058824)[,c("post_node_x","post_node_y","post_node_z")], col='grey', , radius=500)
 
-
+clear3d()
 plot_hs_inputs <- function(cell=c("HSN", "HSE", "HSS")) {
   hsin=subset(hsrin, hscell%in%cell)
   xyz=c("post_node_x","post_node_y","post_node_z")
@@ -61,3 +60,8 @@ plot_hs_inputs <- function(cell=c("HSN", "HSE", "HSS")) {
   spheres3d(subset(hsrin.all.nolptc, post_skid%in%names(sel))[,xyz], col='grey', radius=500)
   plot3d(names(sel), db=hscells)
 }
+
+plot_hs_inputs("HSS")
+nview3d()
+clear3d()
+plot_hs_inputs()
